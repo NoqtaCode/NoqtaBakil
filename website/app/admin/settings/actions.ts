@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 // 1. تحديث الإعدادات العامة (حماية من القيم الفارغة)
 export async function updateGeneralSettings(formData: FormData) {
-  const fields = ['phone', 'whatsapp', 'email', 'address', 'facebook', 'heroTitle', 'heroSubTitle', 'heroDescription'];
+  const fields = ['siteName', 'phone', 'whatsapp', 'email', 'address', 'facebook', 'heroTitle', 'heroSubTitle', 'heroDescription'];
   const patchData: any = {};
 
   // ذكاء برمجى: لا نحدث الحقل إلا إذا كتب المستخدم قيمة جديدة
@@ -20,13 +20,18 @@ export async function updateGeneralSettings(formData: FormData) {
 
   const heroFile = formData.get('heroImage') as File;
   const aboutFile = formData.get('aboutImage') as File;
-  const ctaFile = formData.get('ctaImage') as File;
+  const logoFile = formData.get('logo') as File;
 
   try {
     const existingSettingsId: string | null = await client.fetch(`*[_type == "settings"][0]._id`);
     const settingsId = existingSettingsId || 'siteSettings';
     await client.createIfNotExists({ _id: settingsId, _type: 'settings' });
     let patch = client.patch(settingsId).set(patchData);
+
+    if (logoFile && logoFile.size > 0) {
+      const asset = await client.assets.upload('image', logoFile);
+      patch = patch.set({ logo: { _type: 'image', asset: { _type: "reference", _ref: asset._id } } });
+    }
 
     if (heroFile && heroFile.size > 0) {
       const asset = await client.assets.upload('image', heroFile);
@@ -38,13 +43,9 @@ export async function updateGeneralSettings(formData: FormData) {
       patch = patch.set({ aboutImage: { _type: 'image', asset: { _type: "reference", _ref: asset._id } } });
     }
 
-    if (ctaFile && ctaFile.size > 0) {
-      const asset = await client.assets.upload('image', ctaFile);
-      patch = patch.set({ ctaImage: { _type: 'image', asset: { _type: "reference", _ref: asset._id } } });
-    }
-
     await patch.commit();
     revalidatePath('/');
+    revalidatePath('/', 'layout');
     revalidatePath('/about');
     revalidatePath('/admin/settings');
     return { success: true, message: "تم تحديث البيانات بنجاح" };

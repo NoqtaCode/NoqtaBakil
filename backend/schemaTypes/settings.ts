@@ -13,7 +13,6 @@ export default defineType({
     defineField({ name: 'logo', title: 'الشعار', type: 'image' }),
     defineField({ name: 'heroImage', title: 'صورة الواجهة', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'aboutImage', title: 'صورة من نحن', type: 'image', options: { hotspot: true } }),
-    defineField({ name: 'ctaImage', title: 'صورة خلفية قسم لنبني معاً', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'whatsapp', title: 'رقم واتساب', type: 'string' }),
     defineField({ name: 'phone', title: 'رقم الهاتف', type: 'string' }),
     defineField({ name: 'email', title: 'البريد الإلكتروني', type: 'string' }),

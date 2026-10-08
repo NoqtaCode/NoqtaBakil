@@ -4,8 +4,8 @@ import { MessageCircle, PhoneCall } from "lucide-react";
 import Link from "next/link";
 
 export default function FloatingActions({ settings }: { settings: any }) {
-  const waNumber = settings?.whatsapp || "966500000000";
-  const phone = settings?.phone || "0500000000";
+  const waNumber = settings?.whatsapp || "966537302795";
+  const phone = settings?.phone || "+966537302795";
 
   return (
     <div className="fixed bottom-6 left-6 flex flex-col gap-4 z-[100] md:bottom-10 md:left-10">

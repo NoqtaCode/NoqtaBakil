@@ -14,10 +14,6 @@ export default async function AboutPage() {
     "logoUrl": logo.asset->url
   }`, null);
 
-  const projectsCount = await safeFetch(`count(*[_type == "project"])`, 0);
-
-  const waNumber = settings?.whatsapp || "966500000000";
-
   return (
     <div className="flex flex-col min-h-screen font-sans bg-slate-50 text-slate-900 selection:bg-amber-200 selection:text-emerald-950" dir="rtl">
       <Navbar settings={settings} />
@@ -46,9 +42,9 @@ export default async function AboutPage() {
                 </div>
                 
                 {/* شارة سنوات الخبرة */}
-                <div className="absolute -bottom-6 -right-4 md:bottom-12 md:-right-12 bg-emerald-900 p-8 md:p-12 rounded-[2rem] text-white shadow-[0_20px_50px_rgba(6,78,59,0.3)] z-10 text-center border border-emerald-800/50 backdrop-blur-sm">
-                  <p className="text-5xl md:text-7xl font-black text-amber-400 leading-none">+10</p>
-                  <p className="text-sm md:text-base font-bold mt-3 tracking-wider">سنوات من الإتقان</p>
+                <div className="absolute -bottom-3 right-3 md:bottom-10 md:-right-8 bg-emerald-900 p-4 md:p-8 rounded-2xl md:rounded-[1.75rem] text-white shadow-[0_20px_50px_rgba(6,78,59,0.3)] z-10 text-center border border-emerald-800/50 backdrop-blur-sm">
+                  <p className="text-4xl md:text-5xl font-black text-amber-400 leading-none">+5</p>
+                  <p className="text-xs md:text-sm font-bold mt-2 tracking-wider">سنوات من الإتقان</p>
                 </div>
               </div>
 
@@ -60,41 +56,17 @@ export default async function AboutPage() {
                 </div>
 
                 <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-[1.2] tracking-tight">
-                  ريادة في المقاولات <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-950">وجودة تصنع الفارق</span>
+                  قوة في البناء.. <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-950">دقة في التنفيذ.. وريادة تصنع الفارق</span>
                 </h2>
 
                 <div className="text-slate-600 text-base md:text-xl leading-loose mb-10 font-light max-w-3xl mx-auto lg:mx-0 space-y-6">
                   <p className="mb-6">
-                    نحن مؤسسة مقاولات متكاملة نقدم أفضل الحلول الهندسية بأعلى المواصفات. نتميز في {" "}
-                    <span className="font-bold text-emerald-800 text-lg">
-                      توريد وتركيب الشبوك الزراعية والأمنية
-                    </span>{" "}
-                    لحماية المزارع والمواقع المختلفة بدقة واحترافية.
+                    في <span className="font-bold text-emerald-800">المؤسسة للمقاولات العامة</span> لا نبني مجرد منشآت، بل نرسّخ معايير متقدمة في القوة والصلابة والإتقان الهندسي. انطلقنا برؤية راسخة لنكون الخيار الأول والوجهة الموثوقة للمشاريع الإنشائية والتطويرية الكبرى في مختلف القطاعات.
                   </p>
 
                   <p className="mb-6 border-r-4 border-emerald-600 pr-4 bg-emerald-50/50 py-3 rounded-l-xl">
-                    لدينا خبرة واسعة في بناء وتشييد {" "}
-                    <span className="font-bold text-slate-900 text-lg">
-                      الهناجر والمستودعات
-                    </span>{" "}
-                    الكبرى، بالإضافة إلى تصميم وتنفيذ {" "}
-                    <span className="font-bold text-blue-800 text-lg">
-                      السواتر والمظلات
-                    </span>{" "}
-                    الفاخرة.
-                  </p>
-
-                  <p className="mb-8 border-r-4 border-amber-500 pr-4 bg-amber-50/50 py-3 rounded-l-xl">
-                    كما نفخر بتقديم خدماتنا المتميزة في {" "}
-                    <span className="font-bold text-green-800 text-lg">
-                      توريد النخيل وتنسيق الحدائق
-                    </span>{" "}
-                    لتضفي جمالاً استثنائياً لمساحاتكم، إلى جانب إبداعنا في {" "}
-                    <span className="font-bold text-stone-700 text-lg">
-                      أعمال الحجر الطبيعي
-                    </span>{" "}
-                    وتلبيس الواجهات.
+                    نعتمد على خبرات ميدانية صلبة، وكوادر فنية متمرسة، وأحدث المعدات والتقنيات؛ لننجز مشاريعكم وفق أعلى معايير السلامة والجودة، مع الالتزام بالدقة في المواعيد والمواصفات.
                   </p>
 
                   {/* رابط التواصل الذكي */}
@@ -119,9 +91,9 @@ export default async function AboutPage() {
                   </div>
                   <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm text-center hover:shadow-md transition-shadow">
                     <p className="text-4xl md:text-5xl font-black text-emerald-900 mb-2">
-                      +350
+                      +100
                     </p>
-                    <p className="text-slate-500 font-bold text-sm">عميل راضٍ</p>
+                    <p className="text-slate-500 font-bold text-sm">عميلًا وأكثر</p>
                   </div>
                 </div>
               </div>

@@ -2,17 +2,18 @@ import { safeFetch } from "../../lib/sanity";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Link from "next/link";
-import { MessageCircle, Phone, MapPin, Mail, Clock } from "lucide-react";
+import { MessageCircle, Phone, MapPin, Clock } from "lucide-react";
 
 export const revalidate = 10;
 
 export default async function ContactPage() {
   // 1. جلب البيانات من Sanity
   const settings = await safeFetch(`*[_type == "settings"][0]{
-    siteName, whatsapp, phone, email, address
+    siteName, whatsapp, phone, address, "logoUrl": logo.asset->url
   }`, null);
 
-  const waNumber = settings?.whatsapp || "966500000000";
+  const waNumber = settings?.whatsapp || "966537302795";
+  const phoneNumber = settings?.phone || "+966537302795";
 
   return (
     <div className="flex flex-col min-h-screen font-sans bg-white text-slate-900" dir="rtl">
@@ -47,7 +48,7 @@ export default async function ContactPage() {
 
                   {/* زر اتصال */}
                   <Link 
-                    href={`tel:${settings?.phone}`}
+                    href={`tel:${phoneNumber}`}
                     className="flex items-center justify-center gap-3 px-8 py-5 bg-white text-blue-900 rounded-2xl font-black text-xl hover:bg-slate-100 transition-all shadow-xl"
                   >
                     <span>اتصال هاتفي مباشر</span>
@@ -69,7 +70,7 @@ export default async function ContactPage() {
             </div>
           </div>
 
-          {/* القسم الثاني: معلومات المقر والبريد */}
+          {/* القسم الثاني: معلومات المقر */}
           <div className="bg-white border border-slate-100 rounded-[3rem] p-10 shadow-sm flex flex-col justify-center gap-10">
             <div className="flex gap-6 items-start group">
               <div className="p-5 bg-slate-50 rounded-2xl text-yellow-600 group-hover:bg-yellow-500 group-hover:text-white transition-all">
@@ -78,16 +79,6 @@ export default async function ContactPage() {
               <div>
                 <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">الموقع</p>
                 <p className="text-xl font-black text-slate-800">{settings?.address || "الرياض، المملكة العربية السعودية"}</p>
-              </div>
-            </div>
-
-            <div className="flex gap-6 items-start group">
-              <div className="p-5 bg-slate-50 rounded-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                <Mail size={32} />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">البريد الإلكتروني</p>
-                <p className="text-xl font-black text-slate-800">{settings?.email || "info@mqalatpro.com"}</p>
               </div>
             </div>
           </div>

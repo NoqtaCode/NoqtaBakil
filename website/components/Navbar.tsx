@@ -18,8 +18,8 @@ export default function Navbar({ settings }: NavbarProps) {
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const siteName = settings?.siteName || "مقاولات متكاملة";
-  const waNumber = settings?.whatsapp || "966500000000";
+  const siteName = settings?.siteName || "مؤسسة للمقاولات العامة";
+  const waNumber = settings?.whatsapp || "966537302795";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -47,8 +47,8 @@ export default function Navbar({ settings }: NavbarProps) {
           
           {/* Logo (Right) */}
           <Link href="/#home" className="flex items-center gap-2 lg:gap-3 group">
-            <div className={`relative w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full p-1 shadow-md transition-transform duration-500 group-hover:scale-105`}>
-              <Image src={settings?.logoUrl || "/icon.png"} alt="Logo" fill className="object-contain p-1" priority />
+            <div className={`relative h-12 w-12 overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-105 lg:h-14 lg:w-14 ${scrolled ? 'bg-white/90 p-1 shadow-md' : 'bg-transparent p-0 shadow-none'}`}>
+              <Image src={settings?.logoUrl || "/icon.png"} alt="شعار المؤسسة" fill className="object-contain" priority />
             </div>
             <div className="flex flex-col text-right">
               <span className={`text-base lg:text-xl font-black leading-none transition-colors duration-300 ${scrolled ? 'text-slate-900' : 'text-white'}`}>
@@ -101,7 +101,7 @@ export default function Navbar({ settings }: NavbarProps) {
       <div className={`fixed top-0 right-0 h-full w-[85%] max-w-[360px] bg-slate-900 text-white z-[210] shadow-2xl transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`} dir="rtl">
         <div className="p-6 flex justify-between items-center border-b border-white/10">
            <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 bg-white rounded-full p-1"><Image src={settings?.logoUrl || "/icon.png"} alt="Logo" fill className="object-contain p-1" /></div>
+              <div className="relative h-12 w-12 overflow-hidden rounded-xl bg-transparent"><Image src={settings?.logoUrl || "/icon.png"} alt="شعار المؤسسة" fill className="object-contain" /></div>
               <span className="font-black text-lg">{siteName}</span>
            </div>
            <button onClick={() => setIsOpen(false)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-amber-500 hover:text-black transition-colors"><X size={20} /></button>

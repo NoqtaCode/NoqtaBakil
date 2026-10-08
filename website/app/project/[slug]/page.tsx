@@ -91,7 +91,7 @@ export default async function ProjectDetails(props: { params: Promise<{ slug: st
             </div>
             
             <Link 
-              href="https://wa.me/966500000000" 
+              href="https://wa.me/966537302795"
               target="_blank"
               className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold transition shadow-lg transform hover:scale-105"
             >

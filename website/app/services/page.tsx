@@ -12,7 +12,7 @@ export default async function ServicesPage() {
     siteName, whatsapp, "logoUrl": logo.asset->url
   }`, null);
 
-  const waNumber = settings?.whatsapp || "966500000000";
+  const waNumber = settings?.whatsapp || "966537302795";
 
   const businessServices = [
     {

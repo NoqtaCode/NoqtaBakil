@@ -9,9 +9,9 @@ export const revalidate = 0;
 export default async function SettingsPage() {
   const settings = (await safeFetch(`*[_type == "settings"][0]{
     ..., 
+    "logoImageUrl": logo.asset->url,
     "heroImageUrl": heroImage.asset->url, 
-    "aboutImageUrl": aboutImage.asset->url,
-    "ctaImageUrl": ctaImage.asset->url
+    "aboutImageUrl": aboutImage.asset->url
   }`, {})) ?? {};
 
   return (
@@ -37,6 +37,10 @@ export default async function SettingsPage() {
               </h2>
               <div className="space-y-4 font-sans">
                 <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-400 mr-2 uppercase">اسم الموقع</label>
+                  <input name="siteName" defaultValue={settings.siteName || "مؤسسة للمقاولات العامة"} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition" />
+                </div>
+                <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-400 mr-2 uppercase">العنوان الرئيسي</label>
                   <input name="heroTitle" placeholder={settings.heroTitle || "إتقان في العمل.."} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition" />
                 </div>
@@ -52,6 +56,18 @@ export default async function SettingsPage() {
 
               {/* صور الهوية */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-50">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"><ImageIcon size={14}/> شعار المؤسسة (الهيدر والتبويبة)</label>
+                  <div className="relative flex h-36 items-center justify-center overflow-hidden rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                    {settings.logoImageUrl ? (
+                      <Image src={settings.logoImageUrl} alt="الشعار الحالي للمؤسسة" fill unoptimized className="object-contain p-4" />
+                    ) : (
+                      <span className="text-sm font-bold text-slate-400">لم يُرفع شعار بعد</span>
+                    )}
+                  </div>
+                  <p className="text-xs text-slate-500">ارفع صورة الشعار بصيغة PNG أو SVG أو WebP.</p>
+                  <input type="file" name="logo" accept="image/png,image/svg+xml,image/webp,image/jpeg" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-xs" />
+                </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-slate-500 flex items-center gap-2"> <ImageIcon size={14}/> خلفية الواجهة الرئيسية كاملة </label>
                   <input type="file" name="heroImage" accept="image/jpeg,image/png,image/webp" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-xs" />
@@ -70,18 +86,6 @@ export default async function SettingsPage() {
                   <p className="text-xs text-slate-500">الصورة الحالية في أعلى صفحة «عن الشركة». اختر صورة جديدة لاستبدالها.</p>
                   <input type="file" name="aboutImage" accept="image/jpeg,image/png,image/webp" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-xs" />
                 </div>
-                <div className="space-y-2 md:col-span-2">
-                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"> <ImageIcon size={14}/> صورة خلفية قسم «لنبني معًا» أسفل الصفحة </label>
-                  <div className="relative h-40 overflow-hidden rounded-2xl border border-slate-100 bg-amber-500">
-                    {settings.ctaImageUrl ? (
-                      <Image src={settings.ctaImageUrl} alt="الصورة الحالية لقسم لنبني معًا" fill unoptimized className="object-cover" />
-                    ) : (
-                      <div className="h-full flex items-center justify-center text-slate-900 font-bold">لا توجد صورة مضافة — سيظهر اللون البرتقالي الحالي</div>
-                    )}
-                  </div>
-                  <p className="text-xs text-slate-500">اختر صورة مناسبة، ثم اضغط «حفظ التغييرات» أسفل بيانات التواصل.</p>
-                  <input type="file" name="ctaImage" accept="image/jpeg,image/png,image/webp" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-xs" />
-                </div>
               </div>
             </div>
 
@@ -91,8 +95,8 @@ export default async function SettingsPage() {
                 <Phone size={22} /> أرقام التواصل والروابط
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans">
-                <input name="whatsapp" placeholder={`واتساب: ${settings.whatsapp || 'لا يوجد'}`} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white outline-none transition text-black" />
-                <input name="phone" placeholder={`اتصال: ${settings.phone || 'لا يوجد'}`} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white outline-none transition text-black" />
+                <input name="whatsapp" type="tel" defaultValue={settings.whatsapp || "966537302795"} placeholder="واتساب: 966537302795" className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white outline-none transition text-black" />
+                <input name="phone" type="tel" defaultValue={settings.phone || "+966537302795"} placeholder="اتصال: +966537302795" className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white outline-none transition text-black" />
                 <input name="facebook" placeholder={`رابط فيسبوك: ${settings.facebook || ''}`} className="w-full border-2 border-slate-100 rounded-2xl p-4 bg-slate-50 focus:bg-white outline-none transition text-black md:col-span-2" />
               </div>
               <SubmitButton />

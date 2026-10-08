@@ -5,8 +5,8 @@ import { MapPin, Phone, MessageCircle, Facebook, Layers, Trees, Factory, Tent, D
 export default async function Footer() {
   const settings = await safeFetch(`*[_type == "settings"][0]`, null);
 
-  const waNumber = settings?.whatsapp || "966500000000";
-  const phoneNumber = settings?.phone || "0500000000";
+  const waNumber = settings?.whatsapp || "966537302795";
+  const phoneNumber = settings?.phone || "+966537302795";
   const address = settings?.address || "المملكة العربية السعودية";
 
   return (
@@ -20,7 +20,7 @@ export default async function Footer() {
         <div className="space-y-6">
           <Link href="/" className="inline-block group">
             <h2 className="text-3xl font-black text-white tracking-tight group-hover:text-amber-400 transition-colors">
-              مؤسسة <span className="text-amber-500 group-hover:text-white transition-colors">مقاولات</span>
+              {settings?.siteName || "مؤسسة للمقاولات العامة"}
             </h2>
             <p className="text-[11px] font-bold text-emerald-400/80 tracking-widest mt-1 uppercase">رائدة في التنفيذ والإنجاز</p>
           </Link>
@@ -92,7 +92,7 @@ export default async function Footer() {
       {/* الجزء السفلي: الحقوق وتوقيع المطور */}
       <div className="border-t border-emerald-800/50 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-6 px-6 relative z-10 max-w-7xl mx-auto">
         <p className="text-xs text-emerald-300/50 font-light order-2 md:order-1">
-          جميع الحقوق محفوظة © {new Date().getFullYear()} <span className="text-emerald-200 font-bold">مؤسسة المقاولات</span>
+          جميع الحقوق محفوظة © {new Date().getFullYear()} <span className="text-emerald-200 font-bold">{settings?.siteName || "مؤسسة للمقاولات العامة"}</span>
         </p>
 
         <div className="order-1 md:order-2 flex items-center gap-2 group">

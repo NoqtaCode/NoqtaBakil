@@ -9,7 +9,6 @@ import GalleryPreview from "../components/GalleryPreview";
 import {
   ArrowLeft,
   ArrowDownRight,
-  Sparkles,
   PhoneCall,
   BriefcaseBusiness,
   Star,
@@ -25,8 +24,7 @@ async function getData() {
       heroTitle, heroSubTitle, heroDescription,
       "logoUrl": logo.asset->url,
       "heroUrl": heroImage.asset->url,
-      "aboutUrl": aboutImage.asset->url,
-      "ctaImageUrl": ctaImage.asset->url
+      "aboutUrl": aboutImage.asset->url
     }`, null);
 
     const testimonialsPromise = safeFetch(`*[_type == "testimonial" && isActive == true]{_id, clientName, feedback}`, []);
@@ -53,7 +51,7 @@ async function getData() {
 export default async function Home() {
   const data = await getData();
   const { settings, testimonials, shabouk, nakheel, hajar, hanajer, sawater } = data;
-  const waNumber = settings?.whatsapp || "966500000000";
+  const waNumber = settings?.whatsapp || "966537302795";
 
   const sections = [
     {
@@ -108,49 +106,52 @@ export default async function Home() {
       <Navbar settings={settings} />
 
       {/* --- 1. HERO SECTION --- */}
-      <section id="home" className="relative min-h-[100svh] pt-32 lg:pt-40 pb-20 px-4 md:px-8 flex items-center bg-[#0a0a0a] overflow-hidden w-full">
-        <Image
-          src={settings?.heroUrl || "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070"}
-          alt=""
-          fill
-          priority
-          unoptimized
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-[#071827]/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#071827]/45 via-transparent to-[#071827]/25" />
-        <div className="absolute -bottom-40 -left-40 h-[28rem] w-[28rem] rounded-full bg-emerald-500/15 blur-[100px] pointer-events-none" />
+      <section id="home" className="relative isolate min-h-[100svh] overflow-hidden bg-[#071827] px-4 pb-12 pt-28 sm:px-6 md:pb-16 md:pt-36 lg:px-8 lg:pt-40">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_18%_50%,rgba(16,185,129,0.2),transparent_42%),radial-gradient(ellipse_at_85%_10%,rgba(245,158,11,0.15),transparent_34%),linear-gradient(135deg,#071827_0%,#0b2530_55%,#071827_100%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex justify-center">
-          <div className="w-full max-w-5xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center gap-2 lg:gap-3 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full border border-white/30 bg-black/20 backdrop-blur-sm mb-6 lg:mb-8">
-              <Sparkles className="text-amber-400" size={16} />
-              <span className="text-white font-bold text-xs lg:text-sm tracking-widest uppercase">رؤية هندسية مبتكرة</span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white leading-[1.15] tracking-tight mb-6 lg:mb-8 drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
-              {settings?.heroTitle || "مقاولات"}<br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-l from-amber-200 via-amber-400 to-amber-500 block mt-2">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <div className="order-1 w-full text-center lg:text-right">
+            <span className="mb-5 inline-flex items-center rounded-full border border-amber-300/25 bg-white/5 px-4 py-2 text-sm font-bold text-amber-200 backdrop-blur-sm md:mb-7">
+              جودة في التنفيذ وثقة في الإنجاز
+            </span>
+            <h1 className="mb-5 text-4xl font-black leading-[1.2] tracking-tight text-white sm:text-5xl md:mb-6 md:text-6xl lg:text-7xl xl:text-8xl">
+              {settings?.heroTitle || "مقاولات"}
+              <span className="mt-2 block bg-gradient-to-l from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                 {settings?.heroSubTitle || "عصرية متكاملة"}
               </span>
             </h1>
-            
-            <p className="text-base sm:text-lg lg:text-2xl text-white font-medium leading-[1.8] max-w-4xl mx-auto mb-10 lg:mb-12 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+
+            <p className="mx-auto mb-7 max-w-2xl text-base font-medium leading-[1.9] text-slate-200 sm:text-lg md:mb-9 md:text-xl lg:mx-0 lg:text-2xl">
               {settings?.heroDescription || "نضع بين يديك خبرة سنوات في إنجاز أعقد المشاريع من شبوك، هناجر، زراعة النخيل، وواجهات الحجر الطبيعي، بدقة متناهية وجودة تفوق التوقعات."}
             </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto mx-auto">
-              <Link href="#expertise" className="group flex items-center justify-center sm:justify-between gap-4 lg:gap-6 px-6 lg:px-8 py-4 lg:py-5 bg-white text-black rounded-full font-black text-base lg:text-lg hover:bg-amber-400 transition-all duration-300 w-full sm:w-auto">
-                 <span>استكشف أعمالنا</span>
-                 <div className="w-8 h-8 lg:w-10 lg:h-10 bg-black rounded-full flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-colors shrink-0">
-                   <ArrowDownRight size={18} />
-                 </div>
+
+            <div className="mx-auto flex w-full max-w-md flex-col justify-center gap-3 sm:max-w-lg md:flex-row md:gap-4 lg:mx-0 lg:justify-start">
+              <Link href="#expertise" className="group flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-amber-400 px-5 py-3.5 text-base font-black text-slate-950 shadow-lg shadow-amber-950/20 transition hover:bg-amber-300 md:w-auto md:px-6 lg:px-8 lg:text-lg">
+                <span>استكشف أعمالنا</span>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-950 text-white transition group-hover:bg-white group-hover:text-slate-950">
+                  <ArrowDownRight size={18} />
+                </span>
               </Link>
-              <Link href="/contact" className="flex items-center justify-center gap-3 px-6 lg:px-8 py-4 lg:py-5 border border-white/20 text-white rounded-full font-bold text-base lg:text-lg hover:bg-white/10 backdrop-blur-sm transition-all duration-300 w-full sm:w-auto">
-                 <PhoneCall size={18} />
-                 <span>اطلب استشارة مجانية</span>
+              <Link href="/contact" className="flex min-h-14 w-full items-center justify-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-3.5 text-base font-bold text-white shadow-lg backdrop-blur-md transition hover:border-white/40 hover:bg-white/15 md:w-auto md:px-6 lg:px-8 lg:text-lg">
+                <PhoneCall size={18} />
+                <span>اطلب استشارة مجانية</span>
               </Link>
+            </div>
+          </div>
+
+          <div className="relative order-2 mx-auto w-full max-w-[340px] sm:max-w-[390px] lg:max-w-[460px]">
+            <div className="pointer-events-none absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br from-emerald-400/20 via-transparent to-amber-400/20 blur-2xl" />
+            <div className="relative aspect-[4/5] max-h-[560px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/5 p-2 shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-3">
+              <Image
+                src={settings?.heroUrl || "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070"}
+                alt="صورة من أعمال المؤسسة"
+                fill
+                priority
+                unoptimized
+                sizes="(max-width: 640px) 88vw, (max-width: 1024px) 390px, 460px"
+                className="rounded-[1.5rem] object-contain sm:rounded-[2rem]"
+              />
             </div>
           </div>
         </div>
@@ -237,7 +238,7 @@ export default async function Home() {
       </section>
 
       {/* --- 4. TESTIMONIALS --- */}
-      <section className="py-20 lg:py-32 px-4 md:px-8 bg-slate-950 text-white relative overflow-hidden">
+      {testimonials?.length > 0 && <section className="py-20 lg:py-32 px-4 md:px-8 bg-slate-950 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
         
         <div className="max-w-7xl mx-auto relative z-10">
@@ -268,31 +269,24 @@ export default async function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* --- 5. MASSIVE CTA --- */}
-      <section id="contact" className="min-h-[600px] flex items-center justify-center py-20 sm:py-24 lg:py-32 px-5 md:px-8 bg-slate-950 text-white text-center relative isolate overflow-hidden">
-        {settings?.ctaImageUrl && (
-          <>
-            <Image src={settings.ctaImageUrl} alt="" fill unoptimized sizes="100vw" className="object-cover object-left lg:object-center" />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-950/55 to-slate-950/85" />
-            <div className="absolute inset-0 bg-gradient-to-l from-slate-950/60 via-transparent to-slate-950/30" />
-          </>
-        )}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.04] pointer-events-none"></div>
-        <div className="max-w-4xl mx-auto relative z-10 w-full">
-           <h2 className="text-4xl sm:text-5xl lg:text-[6rem] font-black leading-[1.2] mb-5 sm:mb-7 lg:mb-8 tracking-tight drop-shadow-lg">
-             لنبني معًا <br /><span className="text-amber-400">المشروع القادم!</span>
+      <section id="contact" className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-950 px-5 py-16 text-center text-white sm:py-20 md:px-8 md:py-24 lg:py-28">
+        <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-32 -right-20 h-80 w-80 rounded-full bg-amber-400/10 blur-3xl" />
+        <div className="relative mx-auto w-full max-w-4xl">
+           <h2 className="mb-4 text-3xl font-black leading-tight tracking-tight sm:text-4xl md:mb-6 md:text-5xl lg:text-6xl">
+             لنبني معًا <span className="text-amber-400">المشروع القادم!</span>
            </h2>
-           <p className="text-base sm:text-xl lg:text-3xl font-medium leading-relaxed mb-8 sm:mb-10 lg:mb-14 text-white/90 drop-shadow-md max-w-2xl mx-auto">
-             فريقنا مستعد لتلبية احتياجاتك، تواصل الآن للحصول على استشارة فنية وتسعيرة مجانية.
+           <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-slate-200 sm:text-lg md:mb-10 md:text-xl">
+             فريقنا مستعد لتلبية احتياجاتك. تواصل معنا للحصول على استشارة فنية وتسعيرة مجانية.
            </p>
-           
-           <div className="flex flex-col md:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-6 w-full max-w-2xl mx-auto">
-             <Link href={`https://wa.me/${waNumber}`} target="_blank" className="w-full md:w-auto md:min-w-64 px-7 lg:px-12 py-4 lg:py-5 bg-amber-400 text-slate-950 rounded-full font-black text-base sm:text-lg lg:text-xl hover:bg-amber-300 transition-all shadow-[0_15px_30px_rgba(0,0,0,0.3)] hover:-translate-y-1 active:scale-95 flex items-center justify-center">
-                تواصل عبر واتساب
+           <div className="mx-auto flex w-full max-w-2xl flex-col items-stretch justify-center gap-3 sm:flex-row sm:gap-4">
+             <Link href={`https://wa.me/${waNumber}`} target="_blank" className="flex min-h-14 flex-1 items-center justify-center rounded-full bg-amber-400 px-6 py-3 text-base font-black text-slate-950 shadow-lg shadow-black/20 transition-all hover:-translate-y-1 hover:bg-amber-300 active:scale-95 sm:text-lg">
+                تواصل معنا عبر واتساب
              </Link>
-             <Link href="/contact" className="w-full md:w-auto md:min-w-64 px-7 lg:px-12 py-4 lg:py-5 bg-white/10 backdrop-blur-sm border border-white/50 text-white rounded-full font-black text-base sm:text-lg lg:text-xl hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center">
+             <Link href="/contact" className="flex min-h-14 flex-1 items-center justify-center rounded-full border border-white/40 bg-white/5 px-6 py-3 text-base font-bold text-white transition-all hover:-translate-y-1 hover:bg-white/10 active:scale-95 sm:text-lg">
                 تصفح معلومات الاتصال
              </Link>
            </div>
