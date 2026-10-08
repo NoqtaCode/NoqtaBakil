@@ -1,16 +1,18 @@
-import { client } from "../../../lib/sanity";
+import { safeFetch } from "../../../lib/sanity";
 import { updateGeneralSettings, updateAccountSettings } from "./actions";
 import SubmitButton from "./SubmitButton"; 
 import { Globe, Phone, ShieldCheck, ImageIcon, Key, ShieldAlert } from "lucide-react";
+import Image from "next/image";
 
 export const revalidate = 0;
 
 export default async function SettingsPage() {
-  const settings = await client.fetch(`*[_type == "settings"][0]{
+  const settings = (await safeFetch(`*[_type == "settings"][0]{
     ..., 
     "heroImageUrl": heroImage.asset->url, 
-    "aboutImageUrl": aboutImage.asset->url
-  }`) || {};
+    "aboutImageUrl": aboutImage.asset->url,
+    "ctaImageUrl": ctaImage.asset->url
+  }`, {})) ?? {};
 
   return (
     <div className="max-w-6xl mx-auto pb-20 px-4" dir="rtl">
@@ -51,12 +53,34 @@ export default async function SettingsPage() {
               {/* صور الهوية */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-50">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"> <ImageIcon size={14}/> خلفية الموقع </label>
-                  <input type="file" name="heroImage" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-[10px]" />
+                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"> <ImageIcon size={14}/> خلفية الواجهة الرئيسية كاملة </label>
+                  <input type="file" name="heroImage" accept="image/jpeg,image/png,image/webp" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-xs" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"> <ImageIcon size={14}/> صورة من نحن </label>
-                  <input type="file" name="aboutImage" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-[10px]" />
+                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"> <ImageIcon size={14}/> صورة صفحة «عن الشركة» </label>
+                  <div className="relative h-48 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50">
+                    <Image
+                      src={settings.aboutImageUrl || "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070"}
+                      alt="الصورة الحالية في صفحة عن الشركة"
+                      fill
+                      unoptimized
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="text-xs text-slate-500">الصورة الحالية في أعلى صفحة «عن الشركة». اختر صورة جديدة لاستبدالها.</p>
+                  <input type="file" name="aboutImage" accept="image/jpeg,image/png,image/webp" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-xs" />
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"> <ImageIcon size={14}/> صورة خلفية قسم «لنبني معًا» أسفل الصفحة </label>
+                  <div className="relative h-40 overflow-hidden rounded-2xl border border-slate-100 bg-amber-500">
+                    {settings.ctaImageUrl ? (
+                      <Image src={settings.ctaImageUrl} alt="الصورة الحالية لقسم لنبني معًا" fill unoptimized className="object-cover" />
+                    ) : (
+                      <div className="h-full flex items-center justify-center text-slate-900 font-bold">لا توجد صورة مضافة — سيظهر اللون البرتقالي الحالي</div>
+                    )}
+                  </div>
+                  <p className="text-xs text-slate-500">اختر صورة مناسبة، ثم اضغط «حفظ التغييرات» أسفل بيانات التواصل.</p>
+                  <input type="file" name="ctaImage" accept="image/jpeg,image/png,image/webp" className="w-full border-2 border-dashed border-slate-100 rounded-2xl p-3 bg-slate-50 text-xs" />
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { client } from "./../../../lib/sanity";
+import { safeFetch } from "./../../../lib/sanity";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -13,7 +13,7 @@ async function getProject(slug: string) {
       _createdAt
     }
   `;
-  const project = await client.fetch(query, { slug });
+  const project = await safeFetch(query, null, { slug });
   return project;
 }
 
@@ -50,6 +50,7 @@ export default async function ProjectDetails(props: { params: Promise<{ slug: st
               fill 
               className="object-cover"
               priority 
+              unoptimized
             />
             {/* تدرج لوني خفيف فوق الصورة ليبرز العنوان */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>

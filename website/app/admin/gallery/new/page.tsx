@@ -23,6 +23,8 @@ export default function NewGalleryUpload() {
               <option value="" disabled>-- اختر القسم --</option>
               <option value="shabouk">شبوك ومزارع</option>
               <option value="nakheel">نخيل وحدائق</option>
+              <option value="hanajer">هناجر ومستودعات</option>
+              <option value="sawater">سواتر ومظلات</option>
               <option value="hajar">حجر طبيعي</option>
             </select>
           </div>

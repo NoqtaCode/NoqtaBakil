@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Plus, Users, Quote, Pencil } from "lucide-react"; // أضفنا Pencil هنا
-import { client } from "../../../lib/sanity";
+import { safeFetch } from "../../../lib/sanity";
 import { deleteTestimonial } from "./actions";
 import DeleteButton from "./DeleteButton";
 
 export const revalidate = 0;
 
 export default async function TestimonialsAdmin() {
-  const testimonials = await client.fetch(`*[_type == "testimonial"] | order(_createdAt desc)`);
+  const testimonials = await safeFetch(`*[_type == "testimonial"] | order(_createdAt desc)`, []);
 
   return (
     <div className="pb-20 pt-4">

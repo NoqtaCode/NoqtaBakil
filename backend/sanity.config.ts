@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'our_first_project',
 
-  projectId: 'hd11kx9q',
+  projectId: 'ndsqtj7c',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],

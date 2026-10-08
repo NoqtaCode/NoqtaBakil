@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
-import { client } from '../lib/sanity';
+import { safeFetch } from '../lib/sanity';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const projects = await client.fetch(`*[_type == "project"] { "slug": slug.current, _updatedAt }`);
+  const projects = await safeFetch(`*[_type == "project"] { "slug": slug.current, _updatedAt }`, []);
   const baseUrl = 'https://www.shabouk-pro.com';
 
   const projectUrls = projects.map((project: any) => ({

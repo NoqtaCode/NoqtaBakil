@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Plus, ImageIcon } from "lucide-react";
-import { client } from "../../../lib/sanity";
+import { safeFetch } from "../../../lib/sanity";
 import { deleteGalleryImage } from "./actions";
 import DeleteButton from "./DeleteButton"; // تأكد من وجود ملف DeleteButton.tsx بجانبه
 
@@ -9,14 +9,13 @@ export const revalidate = 0;
 
 export default async function AdminGallery() {
   // جلب الصور مع منع التخزين المؤقت لضمان ظهور الصور فور رفعها
-  const images = await client.fetch(
+  const images = await safeFetch(
     `*[_type == "gallery"] | order(_createdAt desc) {
       _id,
       category,
       "url": image.asset->url
     }`,
-    {},
-    { cache: 'no-store' }
+    [],
   );
 
   // دالة لترجمة الأكواد لأسماء عربية
@@ -24,6 +23,8 @@ export default async function AdminGallery() {
     const labels: Record<string, string> = {
       shabouk: 'شبوك',
       nakheel: 'نخيل',
+      hanajer: 'هناجر',
+      sawater: 'سواتر ومظلات',
       hajar: 'حجر'
     };
     return labels[cat] || 'عام';

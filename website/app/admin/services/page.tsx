@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Plus, Briefcase, Pencil } from "lucide-react"; // Added Pencil
-import { client } from "../../../lib/sanity";
+import { safeFetch } from "../../../lib/sanity";
 import { deleteService } from "./actions";
 import DeleteButton from "./DeleteButton";
 
 export const revalidate = 0;
 
 export default async function ServicesAdmin() {
-  const services = await client.fetch(`*[_type == "service"] | order(_createdAt desc)`);
+  const services = await safeFetch(`*[_type == "service"] | order(_createdAt desc)`, []);
 
   return (
     <div className="pb-20">

@@ -1,4 +1,4 @@
-import { client } from "../../lib/sanity";
+import { safeFetch } from "../../lib/sanity";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Link from "next/link";
@@ -8,9 +8,9 @@ export const revalidate = 10;
 
 export default async function ContactPage() {
   // 1. جلب البيانات من Sanity
-  const settings = await client.fetch(`*[_type == "settings"][0]{
+  const settings = await safeFetch(`*[_type == "settings"][0]{
     siteName, whatsapp, phone, email, address
-  }`);
+  }`, null);
 
   const waNumber = settings?.whatsapp || "966500000000";
 

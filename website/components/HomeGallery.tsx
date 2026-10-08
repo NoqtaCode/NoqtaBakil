@@ -29,6 +29,7 @@ export default function HomeGallery({ images }: { images: any[] }) {
             alt="Main Project" 
             fill 
             className="object-cover transition-transform duration-700 group-hover:scale-105" 
+            unoptimized
           />
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
              <div className="bg-white/20 backdrop-blur-md p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
@@ -38,7 +39,7 @@ export default function HomeGallery({ images }: { images: any[] }) {
         </div>
 
         {/* الصورة الثانية (مربع علوي يمين في الكمبيوتر / مربع يسار في الجوال) */}
-        <div 
+        {images.length > 1 && <div
           onClick={() => setIndex(1)}
           className="relative col-span-1 md:col-span-2 row-span-1 rounded-[2rem] overflow-hidden cursor-pointer group shadow-lg"
         >
@@ -47,12 +48,13 @@ export default function HomeGallery({ images }: { images: any[] }) {
             alt="Project 2" 
             fill 
             className="object-cover transition-transform duration-700 group-hover:scale-105" 
+            unoptimized
           />
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-        </div>
+        </div>}
 
         {/* الصورة الثالثة (مربع سفلي يمين في الكمبيوتر / مربع يمين في الجوال) */}
-        <div 
+        {images.length > 2 && <div
           onClick={() => setIndex(2)}
           className="relative col-span-1 md:col-span-2 row-span-1 rounded-[2rem] overflow-hidden cursor-pointer group shadow-lg"
         >
@@ -61,12 +63,13 @@ export default function HomeGallery({ images }: { images: any[] }) {
             alt="Project 3" 
             fill 
             className="object-cover transition-transform duration-700 group-hover:scale-105" 
+            unoptimized
           />
           {/* طبقة شفافة تظهر "+ المزيد" إذا كان هناك صور أكثر، أو تجميلية */}
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-4">
              <span className="text-white text-xs font-bold md:hidden">مشاهدة</span>
           </div>
-        </div>
+        </div>}
 
       </div>
 

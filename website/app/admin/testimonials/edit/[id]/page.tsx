@@ -1,4 +1,4 @@
-import { client } from "../../../../../lib/sanity";
+import { safeFetch } from "../../../../../lib/sanity";
 import { updateTestimonial } from "../../actions";
 import SubmitButton from "../../../projects/new/SubmitButton";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 export default async function EditTestimonialPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const testimonial = await client.fetch(`*[_id == $id][0]`, { id: params.id });
+  const testimonial = await safeFetch(`*[_id == $id][0]`, null, { id: params.id });
 
   if (!testimonial) return <div className="p-10 text-center">الرأي غير موجود</div>;
 

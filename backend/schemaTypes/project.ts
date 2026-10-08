@@ -20,6 +20,8 @@ export default defineType({
         list: [
           { title: 'أعمال الشبوك والمزارع', value: 'shabouk' },
           { title: 'تنسيق حدائق ونخيل', value: 'nakheel' },
+          { title: 'الهناجر والمستودعات', value: 'hanajer' },
+          { title: 'السواتر والمظلات', value: 'sawater' },
           { title: 'أعمال الحجر الطبيعي', value: 'hajar' },
           { title: 'خدمات أخرى', value: 'other' },
         ],
@@ -45,6 +47,17 @@ export default defineType({
       title: 'وصف العمل',
       type: 'text', 
       rows: 4,
+    }),
+    defineField({ name: 'date', title: 'تاريخ التنفيذ', type: 'date' }),
+    defineField({
+      name: 'status',
+      title: 'حالة النشر',
+      type: 'string',
+      options: { list: [
+        { title: 'منشور', value: 'published' },
+        { title: 'مسودة', value: 'draft' },
+      ] },
+      initialValue: 'published',
     }),
   ],
 })

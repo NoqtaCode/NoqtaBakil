@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 // 1. تحديث الإعدادات العامة (حماية من القيم الفارغة)
 export async function updateGeneralSettings(formData: FormData) {
-  const fields = ['phone', 'whatsapp', 'email', 'address', 'facebook'];
+  const fields = ['phone', 'whatsapp', 'email', 'address', 'facebook', 'heroTitle', 'heroSubTitle', 'heroDescription'];
   const patchData: any = {};
 
   // ذكاء برمجى: لا نحدث الحقل إلا إذا كتب المستخدم قيمة جديدة
@@ -20,9 +20,13 @@ export async function updateGeneralSettings(formData: FormData) {
 
   const heroFile = formData.get('heroImage') as File;
   const aboutFile = formData.get('aboutImage') as File;
+  const ctaFile = formData.get('ctaImage') as File;
 
   try {
-    let patch = client.patch('siteSettings').set(patchData);
+    const existingSettingsId: string | null = await client.fetch(`*[_type == "settings"][0]._id`);
+    const settingsId = existingSettingsId || 'siteSettings';
+    await client.createIfNotExists({ _id: settingsId, _type: 'settings' });
+    let patch = client.patch(settingsId).set(patchData);
 
     if (heroFile && heroFile.size > 0) {
       const asset = await client.assets.upload('image', heroFile);
@@ -34,8 +38,15 @@ export async function updateGeneralSettings(formData: FormData) {
       patch = patch.set({ aboutImage: { _type: 'image', asset: { _type: "reference", _ref: asset._id } } });
     }
 
+    if (ctaFile && ctaFile.size > 0) {
+      const asset = await client.assets.upload('image', ctaFile);
+      patch = patch.set({ ctaImage: { _type: 'image', asset: { _type: "reference", _ref: asset._id } } });
+    }
+
     await patch.commit();
     revalidatePath('/');
+    revalidatePath('/about');
+    revalidatePath('/admin/settings');
     return { success: true, message: "تم تحديث البيانات بنجاح" };
   } catch (error) {
     return { success: false, message: "حدث خطأ في السيرفر" };
@@ -58,8 +69,11 @@ export async function updateAccountSettings(formData: FormData) {
   }
 
   try {
+    const existingSettingsId: string | null = await client.fetch(`*[_type == "settings"][0]._id`);
+    const settingsId = existingSettingsId || 'siteSettings';
+    await client.createIfNotExists({ _id: settingsId, _type: 'settings' });
     await client
-      .patch('siteSettings')
+      .patch(settingsId)
       .set({ username: newUsername, password: newPassword })
       .commit();
 

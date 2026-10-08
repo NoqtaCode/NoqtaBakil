@@ -1,19 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '100mb',
+    },
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cdn.sanity.io', // صور مشاريعك
+        hostname: 'cdn.sanity.io',
       },
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com', // صور الخلفية من Unsplash
+        hostname: 'images.unsplash.com',
       },
     ],
   },
-
-  
 };
 
 export default nextConfig;

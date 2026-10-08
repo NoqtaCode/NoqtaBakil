@@ -1,4 +1,4 @@
-import { client } from "../../lib/sanity";
+import { safeFetch } from "../../lib/sanity";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import GalleryPreview from "../../components/GalleryPreview"; // المكون التفاعلي للتكبير
@@ -9,15 +9,15 @@ export const revalidate = 10;
 
 export default async function GalleryPage() {
   // 1. جلب الإعدادات (للهيدر) وصور كل المشاريع المكتملة
-  const settings = await client.fetch(`*[_type == "settings"][0]`);
+  const settings = await safeFetch(`*[_type == "settings"][0]`, null);
   
-  const projects = await client.fetch(`
-    *[_type == "project" && status == "published"] | order(_createdAt desc) {
-      _id,
-      title,
-      "imageUrl": mainImage.asset->url
-    }
-  `);
+  const projects = await safeFetch(`
+    (*[_type == "project" && status == "published"] | order(_createdAt desc) {
+      _id, title, "imageUrl": mainImage.asset->url
+    }) + (*[_type == "gallery"] | order(_createdAt desc) {
+      _id, "title": category, "imageUrl": image.asset->url
+    })
+  `, []);
 
   return (
     <div className="flex flex-col min-h-screen font-sans bg-white text-slate-900" dir="rtl">

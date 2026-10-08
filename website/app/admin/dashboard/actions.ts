@@ -23,6 +23,7 @@ export async function createProject(formData: FormData) {
       title: title,
       // 👇👇 حفظ القسم في قاعدة البيانات 👇👇
       category: category, 
+      status: 'published',
       slug: { current: title.replace(/\s+/g, '-').toLowerCase() + '-' + Date.now() },
       description: description,
       mainImage: {

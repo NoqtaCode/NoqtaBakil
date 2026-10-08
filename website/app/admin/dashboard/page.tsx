@@ -9,17 +9,17 @@ import {
   Settings as SettingsIcon,
   CheckCircle2
 } from "lucide-react";
-import { client } from "../../../lib/sanity";
+import { safeFetch } from "../../../lib/sanity";
 import Image from "next/image";
 
 export const revalidate = 0;
 
 async function getStats() {
   const [projectsCount, servicesCount, testimonialsCount, latestProjects] = await Promise.all([
-    client.fetch(`count(*[_type == "project"])`),
-    client.fetch(`count(*[_type == "service"])`),
-    client.fetch(`count(*[_type == "testimonial"])`),
-    client.fetch(`*[_type == "project"] | order(_createdAt desc)[0...4] { _id, title, category, "imageUrl": mainImage.asset->url }`),
+    safeFetch(`count(*[_type == "project"])`, 0),
+    safeFetch(`count(*[_type == "service"])`, 0),
+    safeFetch(`count(*[_type == "testimonial"])`, 0),
+    safeFetch(`*[_type == "project"] | order(_createdAt desc)[0...4] { _id, title, category, "imageUrl": mainImage.asset->url }`, []),
   ]);
   return { projectsCount, servicesCount, testimonialsCount, latestProjects };
 }

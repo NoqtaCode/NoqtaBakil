@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Pencil } from "lucide-react"; // استيراد أيقونة القلم
-import { client } from "../../../lib/sanity"; 
+import { Plus, Pencil } from "lucide-react"; 
+import { safeFetch } from "../../../lib/sanity";
 import { deleteProject } from "./actions";
 import DeleteButton from "./DeleteButton"; 
 
 export const revalidate = 0;
 
 export default async function ProjectsList() {
-  const projects = await client.fetch(`
+  const projects = await safeFetch(`
     *[_type == "project"] | order(_createdAt desc) {
       _id,
       title,
@@ -16,18 +16,22 @@ export default async function ProjectsList() {
       status,
       "imageUrl": mainImage.asset->url
     }
-  `);
+  `, []);
 
   const getCategoryName = (cat: string) => {
     const names: Record<string, string> = {
-      shabouk: 'شبوك', nakheel: 'نخيل', hajar: 'حجر', other: 'أخرى'
+      shabouk: 'شبوك', 
+      nakheel: 'نخيل', 
+      hanajer: 'هناجر', 
+      sawater: 'سواتر ومظلات', 
+      hajar: 'حجر', 
+      other: 'أخرى'
     };
     return names[cat] || 'عام';
   };
 
   return (
     <div>
-      {/* الرأس: العنوان وزر الإضافة */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 px-2">
         <h1 className="text-2xl font-bold text-slate-800">إدارة المشاريع</h1>
         <Link href="/admin/projects/new" className="w-full md:w-auto bg-blue-600 text-white px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition shadow-lg">
@@ -60,7 +64,6 @@ export default async function ProjectsList() {
                </span>
                
                <div className="flex items-center gap-2">
-                  {/* زر التعديل للموبايل */}
                   <Link 
                     href={`/admin/projects/edit/${project._id}`} 
                     className="p-2 text-blue-600 bg-blue-50 rounded-lg"
@@ -112,7 +115,6 @@ export default async function ProjectsList() {
                   </span>
                 </td>
                 <td className="p-4 flex justify-center gap-2">
-                   {/* زر التعديل للكمبيوتر */}
                    <Link 
                     href={`/admin/projects/edit/${project._id}`} 
                     className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition"
