@@ -1,5 +1,24 @@
 import { createClient } from "next-sanity";
 
+export type SiteSettings = {
+  siteName?: string;
+  whatsapp?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  facebook?: string;
+  description?: string;
+  heroTitle?: string;
+  heroSubTitle?: string;
+  heroDescription?: string;
+  logoUrl?: string;
+  heroUrl?: string;
+  aboutUrl?: string;
+  aboutImageUrl?: string;
+  logoImageUrl?: string;
+  heroImageUrl?: string;
+};
+
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "ndsqtj7c",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",

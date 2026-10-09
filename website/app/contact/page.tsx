@@ -1,4 +1,4 @@
-import { safeFetch } from "../../lib/sanity";
+import { safeFetch, type SiteSettings } from "../../lib/sanity";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Link from "next/link";
@@ -8,7 +8,7 @@ export const revalidate = 10;
 
 export default async function ContactPage() {
   // 1. جلب البيانات من Sanity
-  const settings = await safeFetch(`*[_type == "settings"][0]{
+  const settings = await safeFetch<SiteSettings | null>(`*[_type == "settings"][0]{
     siteName, whatsapp, phone, address, "logoUrl": logo.asset->url
   }`, null);
 

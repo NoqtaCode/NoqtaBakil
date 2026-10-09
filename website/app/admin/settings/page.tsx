@@ -1,4 +1,4 @@
-import { safeFetch } from "../../../lib/sanity";
+import { safeFetch, type SiteSettings } from "../../../lib/sanity";
 import { updateGeneralSettings, updateAccountSettings } from "./actions";
 import SubmitButton from "./SubmitButton"; 
 import { Globe, Phone, ShieldCheck, ImageIcon, Key, ShieldAlert } from "lucide-react";
@@ -7,7 +7,7 @@ import Image from "next/image";
 export const revalidate = 0;
 
 export default async function SettingsPage() {
-  const settings = (await safeFetch(`*[_type == "settings"][0]{
+  const settings = (await safeFetch<SiteSettings>(`*[_type == "settings"][0]{
     ..., 
     "logoImageUrl": logo.asset->url,
     "heroImageUrl": heroImage.asset->url, 

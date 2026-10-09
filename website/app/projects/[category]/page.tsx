@@ -1,4 +1,4 @@
-import { safeFetch } from "../../../lib/sanity";
+import { safeFetch, type SiteSettings } from "../../../lib/sanity";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import GalleryPreview from "../../../components/GalleryPreview";
@@ -33,7 +33,7 @@ export default async function FullGalleryPage(props: { params: Promise<{ categor
 
   const projects = await safeFetch(query, [], isAll ? {} : { category });
 
-  const settings = await safeFetch(`*[_type == "settings"][0]{ siteName, whatsapp, "logoUrl": logo.asset->url }`, null);
+  const settings = await safeFetch<SiteSettings | null>(`*[_type == "settings"][0]{ siteName, whatsapp, "logoUrl": logo.asset->url }`, null);
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans relative" dir="rtl">

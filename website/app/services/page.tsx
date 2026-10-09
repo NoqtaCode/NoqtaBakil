@@ -1,4 +1,4 @@
-import { safeFetch } from "../../lib/sanity";
+import { safeFetch, type SiteSettings } from "../../lib/sanity";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ServiceCard from "../../components/ServiceCard";
@@ -8,7 +8,7 @@ import { ArrowLeft, Briefcase, Factory, Fence, Gem, MessageCircle, Trees } from 
 export const revalidate = 10;
 
 export default async function ServicesPage() {
-  const settings = await safeFetch(`*[_type == "settings"][0]{
+  const settings = await safeFetch<SiteSettings | null>(`*[_type == "settings"][0]{
     siteName, whatsapp, "logoUrl": logo.asset->url
   }`, null);
 

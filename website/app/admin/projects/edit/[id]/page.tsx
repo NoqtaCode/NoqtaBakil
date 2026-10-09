@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 export default async function EditProjectPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const project = await safeFetch(`*[_id == $id][0]{ ..., "imageUrl": mainImage.asset->url }`, null, { id: params.id });
+  const project = await safeFetch<any>(`*[_id == $id][0]{ ..., "imageUrl": mainImage.asset->url }`, null, { id: params.id });
 
   if (!project) return <div>المشروع غير موجود</div>;
 

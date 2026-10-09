@@ -13,7 +13,7 @@ async function getProject(slug: string) {
       _createdAt
     }
   `;
-  const project = await safeFetch(query, null, { slug });
+  const project = await safeFetch<any>(query, null, { slug });
   return project;
 }
 

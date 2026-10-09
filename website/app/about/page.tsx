@@ -1,4 +1,4 @@
-import { safeFetch } from "../../lib/sanity";
+import { safeFetch, type SiteSettings } from "../../lib/sanity";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import { ArrowLeft } from "lucide-react";
 export const revalidate = 10;
 
 export default async function AboutPage() {
-  const settings = await safeFetch(`*[_type == "settings"][0]{
+  const settings = await safeFetch<SiteSettings | null>(`*[_type == "settings"][0]{
     ...,
     "aboutImageUrl": aboutImage.asset->url,
     "logoUrl": logo.asset->url

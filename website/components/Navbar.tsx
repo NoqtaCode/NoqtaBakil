@@ -10,7 +10,7 @@ interface NavbarProps {
     siteName?: string;
     whatsapp?: string;
     logoUrl?: string;
-  }
+  } | null;
 }
 
 export default function Navbar({ settings }: NavbarProps) {

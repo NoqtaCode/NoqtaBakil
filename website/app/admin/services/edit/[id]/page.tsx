@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 export default async function EditServicePage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const service = await safeFetch(`*[_id == $id][0]`, null, { id: params.id });
+  const service = await safeFetch<any>(`*[_id == $id][0]`, null, { id: params.id });
 
   if (!service) return <div>الخدمة غير موجودة</div>;
 

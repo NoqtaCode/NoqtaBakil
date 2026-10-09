@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 export default async function EditTestimonialPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const testimonial = await safeFetch(`*[_id == $id][0]`, null, { id: params.id });
+  const testimonial = await safeFetch<any>(`*[_id == $id][0]`, null, { id: params.id });
 
   if (!testimonial) return <div className="p-10 text-center">الرأي غير موجود</div>;
 

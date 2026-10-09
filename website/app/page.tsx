@@ -1,4 +1,4 @@
-import { safeFetch } from "../lib/sanity";
+import { safeFetch, type SiteSettings } from "../lib/sanity";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
@@ -19,7 +19,7 @@ export const revalidate = 10;
 
 async function getData() {
   try {
-    const settingsPromise = safeFetch(`*[_type == "settings"][0]{
+    const settingsPromise = safeFetch<SiteSettings | null>(`*[_type == "settings"][0]{
       siteName, whatsapp, phone, email, address, description,
       heroTitle, heroSubTitle, heroDescription,
       "logoUrl": logo.asset->url,

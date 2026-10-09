@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { safeFetch } from "../lib/sanity";
+import { safeFetch, type SiteSettings } from "../lib/sanity";
 import { MapPin, Phone, MessageCircle, Facebook, Layers, Trees, Factory, Tent, Diamond } from "lucide-react";
 
 export default async function Footer() {
-  const settings = await safeFetch(`*[_type == "settings"][0]`, null);
+  const settings = await safeFetch<SiteSettings | null>(`*[_type == "settings"][0]`, null);
 
   const waNumber = settings?.whatsapp || "966537302795";
   const phoneNumber = settings?.phone || "+966537302795";
