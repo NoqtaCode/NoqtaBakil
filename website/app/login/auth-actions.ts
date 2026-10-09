@@ -14,10 +14,10 @@ export async function login(formData: FormData) {
 
     // 2. تحديد البيانات التي سنقارن بها (قاعدة البيانات أولاً ثم ملف البيئة كخيار احتياطي)
     const validUsername = settings?.username || process.env.ADMIN_USER || "admin";
-    const validPassword = settings?.password || process.env.ADMIN_PASS || "Noqta@2025";
+    const validPassword = settings?.password || process.env.ADMIN_PASS;
 
     // 3. التحقق من صحة البيانات المدخلة
-    if (inputUsername === validUsername && inputPassword === validPassword) {
+    if (validPassword && inputUsername === validUsername && inputPassword === validPassword) {
       const cookieStore = await cookies();
       
       // وضع الختم (Cookie) في المتصفح
