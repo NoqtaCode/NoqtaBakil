@@ -9,7 +9,7 @@ export const revalidate = 10;
 
 export default async function GalleryPage() {
   // 1. جلب الإعدادات (للهيدر) وصور كل المشاريع المكتملة
-  const settings = await safeFetch(`*[_type == "settings"][0]`, null);
+  const settings = await safeFetch(`*[_type == "settings"][0]{ siteName, whatsapp, "logoUrl": logo.asset->url }`, null);
   
   const projects = await safeFetch(`
     (*[_type == "project" && status == "published"] | order(_createdAt desc) {
