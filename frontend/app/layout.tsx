@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     {},
   );
   const siteName = settings?.siteName || "مؤسسة للمقاولات العامة";
-  const logoUrl = settings?.logoUrl || "/icon.png";
+  const logoUrl = settings?.logoUrl || "/logo.png";
 
   return {
     title: {

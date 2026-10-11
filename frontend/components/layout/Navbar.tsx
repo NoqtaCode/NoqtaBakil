@@ -48,7 +48,7 @@ export default function Navbar({ settings }: NavbarProps) {
           {/* Logo (Right) */}
           <Link href="/#home" className="flex items-center gap-2 lg:gap-3 group">
             <div className={`relative h-12 w-12 overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-105 lg:h-14 lg:w-14 ${scrolled ? 'bg-white/90 p-1 shadow-md' : 'bg-transparent p-0 shadow-none'}`}>
-              <Image src={settings?.logoUrl || "/icon.png"} alt="شعار المؤسسة" fill className="object-contain" priority />
+              <Image src={settings?.logoUrl || "/logo.png"} alt="شعار المؤسسة" fill className="object-contain" priority unoptimized />
             </div>
             <div className="flex flex-col text-right">
               <span className={`text-base lg:text-xl font-black leading-none transition-colors duration-300 ${scrolled ? 'text-slate-900' : 'text-white'}`}>
@@ -74,9 +74,16 @@ export default function Navbar({ settings }: NavbarProps) {
                     <span className="text-sm font-bold">{sub.name}</span>
                   </Link>
                 ))}
+                <div className="pt-2 mt-2 border-t border-slate-100">
+                  <Link href="/gallery" className="flex items-center justify-between p-3 rounded-2xl bg-amber-50 text-amber-900 font-black text-xs hover:bg-amber-400 hover:text-black transition-all">
+                    <span>المعرض الشامل (كل الأعمال)</span>
+                    <span>&larr;</span>
+                  </Link>
+                </div>
               </div>
             </div>
 
+            <Link href="/gallery" className={`hover:-translate-y-1 transition-all ${scrolled ? 'text-slate-700 hover:text-amber-500' : 'text-white/90 hover:text-amber-400'}`}>المعرض الشامل</Link>
             <Link href="/services" className={`hover:-translate-y-1 transition-all ${scrolled ? 'text-slate-700 hover:text-amber-500' : 'text-white/90 hover:text-amber-400'}`}>الخدمات</Link>
           </div>
 
@@ -101,7 +108,7 @@ export default function Navbar({ settings }: NavbarProps) {
       <div className={`fixed top-0 right-0 h-full w-[85%] max-w-[360px] bg-slate-900 text-white z-[210] shadow-2xl transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`} dir="rtl">
         <div className="p-6 flex justify-between items-center border-b border-white/10">
            <div className="flex items-center gap-3">
-              <div className="relative h-12 w-12 overflow-hidden rounded-xl bg-transparent"><Image src={settings?.logoUrl || "/icon.png"} alt="شعار المؤسسة" fill className="object-contain" /></div>
+              <div className="relative h-12 w-12 overflow-hidden rounded-xl bg-transparent"><Image src={settings?.logoUrl || "/logo.png"} alt="شعار المؤسسة" fill className="object-contain" unoptimized /></div>
               <span className="font-black text-lg">{siteName}</span>
            </div>
            <button onClick={() => setIsOpen(false)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-amber-500 hover:text-black transition-colors"><X size={20} /></button>
