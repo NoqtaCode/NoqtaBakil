@@ -17,6 +17,25 @@ async function getProject(slug: string) {
   return project;
 }
 
+import type { Metadata } from "next";
+
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const decodedSlug = decodeURIComponent(params.slug); 
+  const project = await getProject(decodedSlug);
+  if (!project) return { title: "المشروع غير موجود" };
+
+  return {
+    title: `${project.title} | تفاصيل المشروع والتنفيذ`,
+    description: project.description || `استعرض تفاصيل وصور تنفيذ مشروع ${project.title} المنفذ بأعلى معايير الجودة والمواصفات المعتمدة.`,
+    openGraph: {
+      title: `${project.title} | تفاصيل المشروع والتنفيذ`,
+      description: project.description || `تفاصيل وصور تنفيذ مشروع ${project.title}`,
+      images: project.imageUrl ? [{ url: project.imageUrl, alt: project.title }] : [],
+    },
+  };
+}
+
 export default async function ProjectDetails(props: { params: Promise<{ slug: string }> }) {
   
   const params = await props.params;

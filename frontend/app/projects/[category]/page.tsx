@@ -18,6 +18,18 @@ const getTitle = (cat: string) => {
   return titles[cat] || "معرض الأعمال";
 };
 
+import type { Metadata } from "next";
+
+export async function generateMetadata(props: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const title = getTitle(params.category);
+  return {
+    title: `${title} | صور وأعمال ميدانية معتمدة`,
+    description: `استعرض أحدث أعمالنا ومشاريعنا المنجزة في مجال ${title}. تنفيذ بأعلى معايير الجودة وبأفضل الأسعار التنافسية بالمملكة.`,
+    keywords: [title, "مقاولات الرياض", "مشاريع معتمدة", "صور تنفيذ ميداني", "تسوير ومقاولات"],
+  };
+}
+
 export default async function FullGalleryPage(props: { params: Promise<{ category: string }> }) {
   const params = await props.params;
   const category = params.category;
