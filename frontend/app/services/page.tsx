@@ -5,6 +5,14 @@ import ServiceCard from "../../components/ui/ServiceCard";
 import Link from "next/link";
 import { ArrowLeft, Briefcase, Factory, Fence, Gem, MessageCircle, Trees } from "lucide-react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "خدماتنا | تركيب شبوك، توريد نخيل، هناجر، سواتر ومظلات، حجر طبيعي",
+  description: "خدمات مقاولات متكاملة تشمل تسوير الأراضي والشبوك الأمنية، زراعة النخيل وتنسيق المزارع، بناء المستودعات والهناجر، وتوريد الحجر الطبيعي بجودة فائقة وضمان رسمي.",
+  keywords: ["خدمات مقاولات", "تركيب شبوك الرياض", "توريد نخيل واشنطونيا", "بناء هناجر", "تركيب سواتر ومظلات", "واجهات حجر طبيعي"],
+};
+
 export const revalidate = 10;
 
 export default async function ServicesPage() {

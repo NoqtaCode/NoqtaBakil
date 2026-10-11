@@ -5,6 +5,14 @@ import GalleryPreview from "../../components/sections/GalleryPreview";
 import Link from "next/link";
 import { ImageIcon, ArrowRight } from "lucide-react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "معرض الأعمال الشامل | ألبوم صور المشاريع المنفذة",
+  description: "استعرض صور ومشاريع أعمالنا الميدانية في توريد وتركيب الشبوك الزراعية والأمنية، تنسيق وزراعة النخيل، بناء الهناجر والمستودعات، والمظلات والسواتر والحجر الطبيعي.",
+  keywords: ["معرض أعمال شبوك", "صور مشاريع مقاولات", "ألبوم شبوك مزارع", "صور هناجر", "صور تنسيق نخيل"],
+};
+
 export const revalidate = 10;
 
 export default async function GalleryPage() {

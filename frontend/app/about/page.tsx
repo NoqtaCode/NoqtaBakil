@@ -5,6 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "من نحن | خبرة وريادة في أعمال المقاولات والتسوير",
+  description: "مؤسسة مقاولات سعودية متخصصة في تنفيذ المشروعات الميدانية والتسوير الزراعي والأمني وبناء الهناجر وتنسيق النخيل وواجهات الحجر الطبيعي بأعلى معايير الإتقان.",
+  keywords: ["عن المؤسسة", "مقاول معتمد", "شركة شبوك", "مقاولات الرياض", "مؤسسة تسوير"],
+};
+
 export const revalidate = 10;
 
 export default async function AboutPage() {

@@ -4,6 +4,14 @@ import Footer from "../../components/layout/Footer";
 import Link from "next/link";
 import { MessageCircle, Phone, MapPin, Clock } from "lucide-react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "اتصل بنا | طلب تسعيرة فورية واستشارة مقاولات",
+  description: "تواصل مع فريقنا لطلب تسعيرة تركيب الشبوك، بناء الهناجر، توريد النخيل، وتركيب السواتر والحجر الطبيعي عبر الواتساب أو الاتصال المباشر.",
+  keywords: ["طلب تسعيرة شبوك", "رقم مقاول شبوك", "استشارة مقاولات", "مقاول الرياض واتساب"],
+};
+
 export const revalidate = 10;
 
 export default async function ContactPage() {
