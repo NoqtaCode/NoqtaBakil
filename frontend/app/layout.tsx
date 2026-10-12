@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
   );
   const siteName = settings?.siteName || "مؤسسة للمقاولات العامة";
   const logoUrl = settings?.logoUrl || "/logo.png";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.shabouk-pro.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://abusaleh-ksa.com";
   const description = settings?.description || "مؤسسة رائدة في تنفيذ وتوريد الشبوك الزراعية والأمنية، تنسيق حدائق وزراعة النخيل، بناء الهناجر والمستودعات، تركيب السواتر والمظلات، وأعمال الحجر الطبيعي بالمملكة العربية السعودية.";
 
   return {

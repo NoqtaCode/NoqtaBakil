@@ -3,7 +3,7 @@ import { safeFetch } from '../lib/sanity';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await safeFetch(`*[_type == "project"] { "slug": slug.current, _updatedAt }`, []);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.shabouk-pro.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://abusaleh-ksa.com';
 
   const categories = ['shabouk', 'nakheel', 'hanajer', 'sawater', 'hajar', 'all'];
   const categoryUrls = categories.map((cat) => ({
