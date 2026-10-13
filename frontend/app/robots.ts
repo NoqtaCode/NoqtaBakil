@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/login/'],
     },
-    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.shabouk-pro.com'}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://abusaleh-ksa.com'}/sitemap.xml`,
   };
 }
