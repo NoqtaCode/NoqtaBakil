@@ -91,7 +91,10 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     verification: {
-      google: "B_oeOP25qHS9h3edl53ZgazK5sDXyAH9qnEZMKPBmG0",
+      google: [
+        "zLl11yYHn6oidzISCmvInIRxI6_Mphp2KS5yghRZS9Y",
+        "B_oeOP25qHS9h3edl53ZgazK5sDXyAH9qnEZMKPBmG0",
+      ],
     },
   };
 }
