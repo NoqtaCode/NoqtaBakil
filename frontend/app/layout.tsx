@@ -157,15 +157,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={cairo.className}>
         {children}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-28Q9MNRNKJ"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18511559637"
           strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-tags" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-28Q9MNRNKJ');
+            gtag('config', 'AW-18511559637');
           `}
         </Script>
       </body>
