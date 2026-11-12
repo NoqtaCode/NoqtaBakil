@@ -6,7 +6,12 @@ import Image from "next/image";
 
 export const revalidate = 0;
 
-export default async function SettingsPage() {
+export default async function SettingsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ save?: string }>;
+}) {
+  const { save } = await searchParams;
   const settings = (await safeFetch<SiteSettings>(`*[_type == "settings"][0]{
     ..., 
     "logoImageUrl": logo.asset->url,
@@ -20,6 +25,17 @@ export default async function SettingsPage() {
         <h1 className="text-3xl md:text-4xl font-black text-slate-800">إعدادات المنصة</h1>
         <p className="text-slate-500 mt-2">تحديث هوية الموقع، بيانات التواصل، وحماية الحساب</p>
       </div>
+
+      {save === "success" && (
+        <div role="status" className="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 font-bold text-emerald-800">
+          تم حفظ التغييرات في قاعدة البيانات. حدّث الموقع بعد لحظات لرؤية الاسم أو الصور الجديدة.
+        </div>
+      )}
+      {save === "error" && (
+        <div role="alert" className="mb-8 rounded-2xl border border-red-200 bg-red-50 p-4 font-bold text-red-800">
+          لم يتم حفظ التغييرات. تحقق من اتصال Sanity وصلاحية رمز الكتابة في إعدادات Vercel، ثم حاول مجددًا.
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         
@@ -42,15 +58,15 @@ export default async function SettingsPage() {
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-400 mr-2 uppercase">العنوان الرئيسي</label>
-                  <input name="heroTitle" placeholder={settings.heroTitle || "إتقان في العمل.."} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition" />
+                  <input name="heroTitle" defaultValue={settings.heroTitle || ""} placeholder="إتقان في العمل.." className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-400 mr-2 uppercase">العنوان الفرعي (الأصفر)</label>
-                  <input name="heroSubTitle" placeholder={settings.heroSubTitle || "وفخامة في التنفيذ"} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition" />
+                  <input name="heroSubTitle" defaultValue={settings.heroSubTitle || ""} placeholder="وفخامة في التنفيذ" className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition" />
                 </div>
                 <div className="space-y-1">
                    <label className="text-xs font-bold text-slate-400 mr-2 uppercase">الوصف التعريفي</label>
-                   <textarea name="heroDescription" rows={3} placeholder={settings.heroDescription || "اكتب وصفاً جذاباً ..."} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition"></textarea>
+                   <textarea name="heroDescription" rows={3} defaultValue={settings.heroDescription || ""} placeholder="اكتب وصفاً جذاباً ..." className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition"></textarea>
                 </div>
               </div>  
 

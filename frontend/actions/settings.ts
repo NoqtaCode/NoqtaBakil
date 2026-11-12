@@ -46,14 +46,18 @@ export async function updateGeneralSettings(formData: FormData) {
     }
 
     await patch.commit();
-    revalidatePath('/');
+    // These values are shared by the site header, metadata, homepage and About page.
     revalidatePath('/', 'layout');
     revalidatePath('/about');
-    revalidatePath('/admin/settings');
-    return { success: true, message: "تم تحديث البيانات بنجاح" };
+    revalidatePath('/services');
+    revalidatePath('/contact');
+    revalidatePath('/gallery');
   } catch (error) {
-    return { success: false, message: "حدث خطأ في السيرفر" };
+    console.error('Failed to update site settings in Sanity:', error);
+    redirect('/admin/settings?save=error');
   }
+
+  redirect('/admin/settings?save=success');
 }
 
 export async function updateAccountSettings(formData: FormData) {
