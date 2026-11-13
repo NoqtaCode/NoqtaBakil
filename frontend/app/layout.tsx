@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import Script from "next/script";
 import { safeFetch } from "../lib/sanity";
+import { cleanMarketingText } from "../lib/marketing-copy";
 import "./globals.css";
 
 const cairo = Cairo({ 
@@ -15,10 +16,10 @@ export async function generateMetadata(): Promise<Metadata> {
     `*[_type == "settings"][0]{siteName, "logoUrl": logo.asset->url, description}`,
     {},
   );
-  const siteName = settings?.siteName || "مؤسسة للمقاولات العامة";
+  const siteName = cleanMarketingText(settings?.siteName) || "مقاولات عامة";
   const logoUrl = settings?.logoUrl || "/logo.png";
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://abusaleh-ksa.com";
-  const description = settings?.description || "مؤسسة رائدة في تنفيذ وتوريد الشبوك الزراعية والأمنية، تنسيق حدائق وزراعة النخيل، بناء الهناجر والمستودعات، تركيب السواتر والمظلات، وأعمال الحجر الطبيعي بالمملكة العربية السعودية.";
+  const description = cleanMarketingText(settings?.description) || "نقدم خدمات متكاملة في تنفيذ وتوريد الشبوك الزراعية والأمنية، وتنسيق الحدائق وزراعة النخيل، وبناء الهناجر والمستودعات، وتركيب السواتر والمظلات، وأعمال الحجر الطبيعي في المملكة العربية السعودية.";
 
   return {
     metadataBase: new URL(siteUrl),
@@ -39,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
       // الحجر الطبيعي والواجهات
       "حجر طبيعي", "واجهات حجر", "حجر الرياض", "تركيب حجر طبيعي", "واجهات حجر طبيعي", "حجر مقدسي", "ديكورات حجرية",
       // عام واستعلام
-      "مؤسسة مقاولات عامة", "مقاول عام", "مقاولات السعودية", "مقاول معتمد", "أسعار الشبوك", "أسعار الهناجر"
+      "خدمات مقاولات عامة", "مقاول عام", "مقاولات السعودية", "مقاول معتمد", "أسعار الشبوك", "أسعار الهناجر"
     ],
     authors: [{ name: siteName }],
     creator: siteName,
@@ -104,7 +105,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     `*[_type == "settings"][0]{siteName, "logoUrl": logo.asset->url, phone, address}`,
     {},
   );
-  const siteName = settings?.siteName || "مؤسسة للمقاولات العامة";
+  const siteName = cleanMarketingText(settings?.siteName) || "مقاولات عامة";
   const logoUrl = settings?.logoUrl || "/logo.png";
   const phone = settings?.phone || "+966537302795";
   const address = settings?.address || "المملكة العربية السعودية";

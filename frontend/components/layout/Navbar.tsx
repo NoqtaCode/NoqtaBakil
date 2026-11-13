@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown, MessageCircle, Layers, Trees, Factory, Tent, Diamond } from "lucide-react";
+import { cleanMarketingText } from "../../lib/marketing-copy";
 
 interface NavbarProps {
   settings?: {
@@ -18,7 +19,7 @@ export default function Navbar({ settings }: NavbarProps) {
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const siteName = settings?.siteName || "مؤسسة للمقاولات العامة";
+  const siteName = cleanMarketingText(settings?.siteName) || "مقاولات عامة";
   const waNumber = settings?.whatsapp || "966537302795";
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function Navbar({ settings }: NavbarProps) {
           {/* Logo (Right) */}
           <Link href="/#home" className="flex items-center gap-2 lg:gap-3 group">
             <div className={`relative h-12 w-12 overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-105 lg:h-14 lg:w-14 ${scrolled ? 'bg-white/90 p-1 shadow-md' : 'bg-transparent p-0 shadow-none'}`}>
-              <Image src={settings?.logoUrl || "/logo.png"} alt="شعار المؤسسة" fill className="object-contain" priority unoptimized />
+              <Image src={settings?.logoUrl || "/logo.png"} alt="شعار الموقع" fill className="object-contain" priority unoptimized />
             </div>
             <div className="flex flex-col text-right">
               <span className={`text-base lg:text-xl font-black leading-none transition-colors duration-300 ${scrolled ? 'text-slate-900' : 'text-white'}`}>
@@ -108,7 +109,7 @@ export default function Navbar({ settings }: NavbarProps) {
       <div className={`fixed top-0 right-0 h-full w-[85%] max-w-[360px] bg-slate-900 text-white z-[210] shadow-2xl transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`} dir="rtl">
         <div className="p-6 flex justify-between items-center border-b border-white/10">
            <div className="flex items-center gap-3">
-              <div className="relative h-12 w-12 overflow-hidden rounded-xl bg-transparent"><Image src={settings?.logoUrl || "/logo.png"} alt="شعار المؤسسة" fill className="object-contain" unoptimized /></div>
+              <div className="relative h-12 w-12 overflow-hidden rounded-xl bg-transparent"><Image src={settings?.logoUrl || "/logo.png"} alt="شعار الموقع" fill className="object-contain" unoptimized /></div>
               <span className="font-black text-lg">{siteName}</span>
            </div>
            <button onClick={() => setIsOpen(false)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-amber-500 hover:text-black transition-colors"><X size={20} /></button>

@@ -145,7 +145,7 @@ export default async function Home() {
             <div className="relative aspect-[4/5] max-h-[560px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/5 p-2 shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-3">
               <Image
                 src={settings?.heroUrl || "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070"}
-                alt="صورة من أعمال المؤسسة"
+                alt="صورة من أعمال المقاولات"
                 fill
                 priority
                 unoptimized

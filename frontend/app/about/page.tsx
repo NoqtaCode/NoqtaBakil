@@ -9,8 +9,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "من نحن | خبرة وريادة في أعمال المقاولات والتسوير",
-  description: "مؤسسة مقاولات سعودية متخصصة في تنفيذ المشروعات الميدانية والتسوير الزراعي والأمني وبناء الهناجر وتنسيق النخيل وواجهات الحجر الطبيعي بأعلى معايير الإتقان.",
-  keywords: ["عن المؤسسة", "مقاول معتمد", "شركة شبوك", "مقاولات الرياض", "مؤسسة تسوير"],
+  description: "خدمات مقاولات سعودية متخصصة في تنفيذ المشروعات الميدانية والتسوير الزراعي والأمني وبناء الهناجر وتنسيق النخيل وواجهات الحجر الطبيعي بأعلى معايير الإتقان.",
+  keywords: ["خدمات المقاولات", "مقاول معتمد", "شركة شبوك", "مقاولات الرياض", "خدمات التسوير"],
 };
 
 export const revalidate = 10;
@@ -40,7 +40,7 @@ export default async function AboutPage() {
                 <div className="relative h-[350px] md:h-[600px] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
                   <Image
                     src={settings?.aboutImageUrl || "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070"}
-                    alt="عن المؤسسة"
+                    alt="أعمال المقاولات"
                     fill
                     className="object-cover transition duration-1000 group-hover:scale-105"
                     priority
@@ -70,7 +70,7 @@ export default async function AboutPage() {
 
                 <div className="text-slate-600 text-base md:text-xl leading-loose mb-10 font-light max-w-3xl mx-auto lg:mx-0 space-y-6">
                   <p className="mb-6">
-                    في <span className="font-bold text-emerald-800">المؤسسة للمقاولات العامة</span> لا نبني مجرد منشآت، بل نرسّخ معايير متقدمة في القوة والصلابة والإتقان الهندسي. انطلقنا برؤية راسخة لنكون الخيار الأول والوجهة الموثوقة للمشاريع الإنشائية والتطويرية الكبرى في مختلف القطاعات.
+                    في <span className="font-bold text-emerald-800">خدمات المقاولات العامة</span> لا نبني مجرد منشآت، بل نرسّخ معايير متقدمة في القوة والصلابة والإتقان الهندسي. انطلقنا برؤية راسخة لنكون الخيار الأول والوجهة الموثوقة للمشاريع الإنشائية والتطويرية الكبرى في مختلف القطاعات.
                   </p>
 
                   <p className="mb-6 border-r-4 border-emerald-600 pr-4 bg-emerald-50/50 py-3 rounded-l-xl">

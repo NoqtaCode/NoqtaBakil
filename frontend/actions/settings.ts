@@ -8,6 +8,7 @@ import { client } from "../lib/sanity";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { cleanMarketingText } from "../lib/marketing-copy";
 
 export async function updateGeneralSettings(formData: FormData) {
   const fields = ['siteName', 'phone', 'whatsapp', 'email', 'address', 'facebook', 'heroTitle', 'heroSubTitle', 'heroDescription'];
@@ -16,7 +17,7 @@ export async function updateGeneralSettings(formData: FormData) {
   fields.forEach(field => {
     const value = formData.get(field) as string;
     if (value && value.trim() !== "") {
-      patchData[field] = value.trim();
+      patchData[field] = cleanMarketingText(value.trim());
     }
   });
 

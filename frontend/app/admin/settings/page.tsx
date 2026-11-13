@@ -3,6 +3,7 @@ import { updateGeneralSettings, updateAccountSettings } from "../../../actions/s
 import SettingsSubmitButton from "../../../components/admin/SettingsSubmitButton"; 
 import { Globe, Phone, ShieldCheck, ImageIcon, Key, ShieldAlert } from "lucide-react";
 import Image from "next/image";
+import { cleanMarketingText } from "../../../lib/marketing-copy";
 
 export const revalidate = 0;
 
@@ -54,7 +55,7 @@ export default async function SettingsPage({
               <div className="space-y-4 font-sans">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-400 mr-2 uppercase">اسم الموقع</label>
-                  <input name="siteName" defaultValue={settings.siteName || "مؤسسة للمقاولات العامة"} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition" />
+                  <input name="siteName" defaultValue={cleanMarketingText(settings.siteName) || "مقاولات عامة"} className="w-full border-2 border-slate-100 rounded-2xl p-4 text-black outline-none focus:border-blue-500 bg-slate-50 transition" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-400 mr-2 uppercase">العنوان الرئيسي</label>
@@ -73,10 +74,10 @@ export default async function SettingsPage({
               {/* صور الهوية */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-50">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"><ImageIcon size={14}/> شعار المؤسسة (الهيدر والتبويبة)</label>
+                  <label className="text-xs font-bold text-slate-500 flex items-center gap-2"><ImageIcon size={14}/> شعار الموقع (الهيدر والتبويبة)</label>
                   <div className="relative flex h-36 items-center justify-center overflow-hidden rounded-2xl border border-slate-100 bg-slate-50 p-4">
                     {settings.logoImageUrl ? (
-                      <Image src={settings.logoImageUrl} alt="الشعار الحالي للمؤسسة" fill unoptimized className="object-contain p-4" />
+                      <Image src={settings.logoImageUrl} alt="شعار الموقع الحالي" fill unoptimized className="object-contain p-4" />
                     ) : (
                       <span className="text-sm font-bold text-slate-400">لم يُرفع شعار بعد</span>
                     )}
